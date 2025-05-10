@@ -29,7 +29,7 @@ CREATE TABLE `alocacao` (
   `id_professor` int DEFAULT NULL,
   `id_sala` int DEFAULT NULL,
   `id_horario` int NOT NULL,
-  `dia_semana` enum('segunda','terça','quarta','quinta','sexta') NOT NULL,
+  `dia_semana` enum('Segunda','Terça','Quarta','Quinta','Sexta','Sábado') DEFAULT NULL,
   PRIMARY KEY (`id_alocacao`),
   KEY `id_turma` (`id_turma`),
   KEY `id_disciplina` (`id_disciplina`),
@@ -41,7 +41,7 @@ CREATE TABLE `alocacao` (
   CONSTRAINT `alocacao_ibfk_3` FOREIGN KEY (`id_professor`) REFERENCES `professor` (`id_professor`),
   CONSTRAINT `alocacao_ibfk_4` FOREIGN KEY (`id_sala`) REFERENCES `sala` (`id_sala`),
   CONSTRAINT `alocacao_ibfk_5` FOREIGN KEY (`id_horario`) REFERENCES `horario` (`id_horario`)
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -50,7 +50,7 @@ CREATE TABLE `alocacao` (
 
 LOCK TABLES `alocacao` WRITE;
 /*!40000 ALTER TABLE `alocacao` DISABLE KEYS */;
-INSERT INTO `alocacao` VALUES (11,1,2,2,1,1,'segunda'),(12,1,3,2,2,2,'segunda'),(13,1,1,1,1,3,'segunda'),(14,1,1,1,1,4,'segunda'),(15,2,2,1,2,1,'segunda'),(16,11,4,1,2,7,'segunda'),(17,1,1,1,1,1,'quarta'),(18,1,1,1,1,1,'terça'),(19,1,1,1,1,1,'quinta'),(20,1,2,1,1,1,'sexta'),(21,1,3,1,1,2,'terça');
+INSERT INTO `alocacao` VALUES (1,1,1,1,1,1,'Segunda'),(2,1,1,1,1,1,'Terça'),(3,1,1,1,1,1,'Sábado'),(4,1,1,1,2,1,'Sexta'),(5,1,2,1,1,1,'Quinta'),(6,1,2,3,1,1,'Quarta'),(7,1,1,2,1,2,'Segunda');
 /*!40000 ALTER TABLE `alocacao` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -188,6 +188,7 @@ DROP TABLE IF EXISTS `turma`;
 CREATE TABLE `turma` (
   `id_turma` int NOT NULL AUTO_INCREMENT,
   `nome` varchar(100) NOT NULL,
+  `descricao` varchar(90) DEFAULT NULL,
   PRIMARY KEY (`id_turma`)
 ) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -198,7 +199,7 @@ CREATE TABLE `turma` (
 
 LOCK TABLES `turma` WRITE;
 /*!40000 ALTER TABLE `turma` DISABLE KEYS */;
-INSERT INTO `turma` VALUES (1,'101'),(2,'102'),(3,'103'),(4,'104'),(5,'201'),(6,'202'),(7,'203'),(8,'204'),(9,'301'),(10,'302'),(11,'303'),(12,'304');
+INSERT INTO `turma` VALUES (1,'101','Técnico em Administração'),(2,'102','Técnico em Farmácia'),(3,'103','Técnico em Informática'),(4,'104','Técnico em Segurança do Trabalho'),(5,'201','Técnico em Administração'),(6,'202','Técnico em Logística'),(7,'203','Técnico em Informática'),(8,'204','Técnico em Segurança do Trabalho'),(9,'301','Técnico em Administração'),(10,'302','Técnico em Serviço Jurídico'),(11,'303','Técnico em Informática'),(12,'304','Técnico em Enfermagem');
 /*!40000 ALTER TABLE `turma` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -211,4 +212,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-05-04 21:03:26
+-- Dump completed on 2025-05-10 19:52:41
