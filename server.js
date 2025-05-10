@@ -8,10 +8,10 @@ app.use(cors());
 
 // Configuração da conexão com o banco de dados
 const db = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
+  host: '10.0.0.51',
+  user: 'luis_remote',
   password: 'Luisga1.',
-  database: 'IEMA'
+  database: 'IEMA'  
 });
 
 db.connect(err => {
@@ -154,4 +154,7 @@ app.post('/api/alocacao', (req, res) => {
 
 // Subir o servidor
 const PORT = 3030;
-app.listen(PORT, () => console.log(`Servidor rodando em http://localhost:${PORT}/`));
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`Servidor rodando em http://0.0.0.0:${PORT}/`);
+});
+
