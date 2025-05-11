@@ -86,6 +86,7 @@ app.get('/api/alocacao', (req, res) => {
 // Inserir ou atualizar alocação (upsert)
 app.post('/api/alocacao', (req, res) => {
   const { id_turma, id_disciplina, id_horario, dia_semana, id_professor, id_sala } = req.body;
+
   // Verifica se já existe alocação para mesma turma+horario+dia
   const selectExist = `
     SELECT id_alocacao FROM alocacao
@@ -100,13 +101,17 @@ app.post('/api/alocacao', (req, res) => {
       return res.status(500).json({ error: 'Erro interno' });
     }
     const existingId = existRows.length ? existRows[0].id_alocacao : null;
+
     // Checa conflito de sala/professor com outras alocações (exceto a própria se atualizando)
     const conflictQuery = `
       SELECT 1 FROM alocacao
       WHERE dia_semana = ?
         AND id_horario = ?
         AND (id_alocacao <> ? OR ? IS NULL)
-        AND (id_sala = ? OR id_professor = ?)
+        AND (
+          (id_sala NOT IN (2, 7) AND id_sala = ?) OR
+          id_professor = ?
+        )
       LIMIT 1
     `;
     db.query(conflictQuery,
