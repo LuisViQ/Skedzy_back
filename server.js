@@ -8,7 +8,7 @@ app.use(cors());
 
 // Configuração da conexão com o banco de dados
 const db = mysql.createConnection({
-  host: '10.0.0.51',
+  host: 'localhost',
   user: 'luis_remote',
   password: 'Luisga1.',
   database: 'IEMA'  
